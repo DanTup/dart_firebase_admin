@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fast fail the script on failures.
-set -e
+set -e -m
 
 dart pub global activate coverage
 
@@ -11,7 +11,7 @@ dart run --pause-isolates-on-exit --disable-service-auth-codes --enable-vm-servi
 
 jobs -l
 
-dart pub global run coverage:collect_coverage --wait-paused --uri=http://127.0.0.1:8181/ -o coverage/coverage.json --resume-isolates --scope-output=foo
+dart pub global run coverage:collect_coverage --wait-paused --uri=http://127.0.0.1:8181/ -o coverage/coverage.json --resume-isolates --scope-output=foo &
 
 jobs -l
 
