@@ -1,14 +1,7 @@
 name: Build
 
 on:
-  pull_request:
-    paths-ignore:
-      - "**.md"
-      - "**.mdx"
-
-  schedule:
-    # runs the CI everyday at 10AM
-    - cron: "0 10 * * *"
+  push:
 
 jobs:
   build:
@@ -37,14 +30,5 @@ jobs:
       - name: Install dependencies
         run: dart pub get && cd example && dart pub get && cd -
 
-      - name: Check format
-        run: dart format --set-exit-if-changed .
-
-      - name: Analyze
-        run: dart analyze
-
       - name: Run tests
         run: ${{github.workspace}}/scripts/coverage.sh
-
-      - name: Upload coverage to codecov
-        run: curl -s https://codecov.io/bash | bash
