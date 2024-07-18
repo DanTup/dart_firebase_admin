@@ -1,8 +1,10 @@
 #!/bin/bash
 
 # Fast fail the script on failures.
-set -e -m
+set -e
 
 dart pub global activate coverage
 
-firebase emulators:exec --project dart-firebase-admin --only firestore,auth "dart run bin/throw.dart"
+firebase emulators:start --project dart-firebase-admin --only firestore,auth
+
+dart test --coverage=coverage
