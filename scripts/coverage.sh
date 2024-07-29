@@ -5,7 +5,6 @@ set -e
 
 dart pub global activate coverage
 
-firebase emulators:start --project dart-firebase-admin --only firestore,auth &
+firebase emulators:exec --project dart-firebase-admin --only firestore,auth "dart test --coverage=coverage" 
 
-# dart test --coverage=coverage
-dart pub run test  --coverage=coverage
+format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.dart_tool/package_config.json --report-on=lib
